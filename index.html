@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lumière Skin</title>
+
+  <!-- GSAP -->
+  <script src="https://unpkg.com/gsap@3/dist/gsap.min.js"></script>
+
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<section class="hero">
+  <video class="hero-video" autoplay muted loop playsinline>
+    <source src="assets/lizdahome.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+  <!-- NAVBAR -->
+  <header class="nav">
+    <div class="logo">
+      <img src="assets/logo.png" alt="Lumière Skin">
+    </div>
+
+    <nav class="nav-links">
+      <a href="#">Shop</a>
+      <a href="#">About</a>
+      <a href="#">Science</a>
+      <a href="#">Contact</a>
+      <button class="menu-btn">MENU</button>
+    </nav>
+  </header>
+
+  <!-- HERO TEXT -->
+  <div class="hero-content">
+    <h1>
+      Glow Confidently.<br>
+      Powered by Science.
+    </h1>
+  </div>
+
+  <!-- BOTTOM LINE -->
+  <div class="bottom-line"></div>
+
+  <!-- BOTTOM CONTENT -->
+  <div class="bottom-content">
+
+    <div class="product-card">
+      <div>
+        <h4>Microbiome Mask</h4>
+        <p>
+          Our moisturizing face mask helps to support
+          and strengthen skin’s
+        </p>
+        <span>$32</span>
+      </div>
+    </div>
+
+    <div class="cta">
+      <p>
+        Formulas that simplify your skincare developed
+        with dermatological precision for everyday radiance.
+      </p>
+<button class="shop-btn hero-cta">
+  <span class="button__icon-wrapper">
+    <svg viewBox="0 0 14 15" class="button__icon-svg" width="10">
+      <path d="M13.376 11.552l-.264-10.44-10.44-.24.024 2.28
+        6.96-.048L.2 12.56l1.488 1.488
+        9.432-9.432-.048 6.912 2.304.024z"
+        fill="currentColor"/>
+    </svg>
+
+    <svg viewBox="0 0 14 15"
+      class="button__icon-svg button__icon-svg--copy"
+      width="10">
+      <path d="M13.376 11.552l-.264-10.44-10.44-.24.024 2.28
+        6.96-.048L.2 12.56l1.488 1.488
+        9.432-9.432-.048 6.912 2.304.024z"
+        fill="currentColor"/>
+    </svg>
+  </span>
+  Shop Now
+</button>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ================= MENU OVERLAY (MOVED OUTSIDE NAV) ================= -->
+
+<div class="menu-overlay">
+
+  <div class="menu-left">
+    <div class="menu-image active"></div>
+    <div class="menu-image"></div>
+  </div>
+
+  <div class="menu-right">
+
+    <button class="menu-close">✕</button>
+
+    <nav class="menu-main">
+      <a href="#" data-img="https://images.pexels.com/photos/1759478/pexels-photo-1759478.jpeg">SHOWROOM</a>
+      <a href="#" data-img="https://images.pexels.com/photos/2410345/pexels-photo-2410345.jpeg">EVENTS</a>
+      <a href="#" data-img="https://images.pexels.com/photos/33664077/pexels-photo-33664077.jpeg">PORSCHE</a>
+      <a href="#" data-img="https://images.pexels.com/photos/11836425/pexels-photo-11836425.jpeg">BENTLEY</a>
+      <a href="#" data-img="https://images.pexels.com/photos/9721695/pexels-photo-9721695.jpeg">LAMBORGHINI</a>
+    </nav>
+
+    <div class="menu-divider"></div>
+
+    <div class="menu-secondary">
+      <p>BOOK TID PÅ VÆRKSTED</p>
+      <p>SKIFT TIL SEMLER PREMIUM</p>
+      <p>KONTAKT</p>
+      <p>MEDARBEJDERE</p>
+      <p>NYHEDER</p>
+      <p>FLEXLEASING</p>
+      <p>OM SEMLER PREMIUM</p>
+    </div>
+
+    <div class="menu-address">
+      <p>Semler Premium Danmark</p>
+      <p>Banevingen 6</p>
+      <p>2200 København N</p>
+    </div>
+
+  </div>
+</div>
+
+<!-- JS -->
+<script src="script.js"></script>
+
+</body>
+</html>
