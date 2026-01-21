@@ -39,6 +39,13 @@ html, body {
   pointer-events: none;
 
   background:
+    /* SOFT GLOBAL TINT (matches menu, no blur) */
+    linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.22),
+      rgba(0, 0, 0, 0.22)
+    ),
+
     /* VERY LIGHT TOP SHADE */
     linear-gradient(
       to bottom,
@@ -47,7 +54,8 @@ html, body {
       rgba(0, 0, 0, 0.04) 32%,
       rgba(0, 0, 0, 0) 45%
     ),
-    /* YOUR ORIGINAL RIGHT GRADIENT */
+
+    /* RIGHT SIDE GRADIENT */
     linear-gradient(
       to right,
       rgba(0, 0, 0, 0.55) 0%,
@@ -56,6 +64,7 @@ html, body {
       rgba(0, 0, 0, 0) 75%
     );
 }
+
 
 
 /* STRONG LUXURY GRADIENT */
@@ -134,11 +143,18 @@ html, body {
   position: fixed;
   inset: 0;
   display: flex;
-  background: #fff;
+
+  background: rgba(0, 0, 0, 0.32); /* adjust blue tone here */
+
+  /* GLASS BLUR */
+  backdrop-filter: blur(22px) saturate(120%);
+  -webkit-backdrop-filter: blur(22px) saturate(120%);
+
   z-index: 999;
   opacity: 0;
   pointer-events: none;
 }
+
 
 /* LEFT IMAGE AREA */
 .menu-left {
@@ -187,10 +203,11 @@ html, body {
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  border: 1px solid #111;
+  border: 1px solid #ffffff;
   background: none;
   cursor: pointer;
   font-size: 18px;
+  color: #ddd;
 }
 
 /* ===================== */
@@ -201,7 +218,7 @@ html, body {
   position: relative;
   display: block;
   font-size: clamp(32px, 4vw, 54px);
-  color: #9a9a9a;              /* GREY WHEN INACTIVE */
+  color: #ffffff59;              /* GREY WHEN INACTIVE */
   text-decoration: none;
   margin-bottom: 18px;
   padding-left: 18px;          /* space for dot */
@@ -216,7 +233,7 @@ html, body {
   top: 0.55em;
   width: 6px;
   height: 6px;
-  background: #111;
+  background: #ffffff;
   border-radius: 50%;
   opacity: 0;
   transform: scale(0);
@@ -225,7 +242,7 @@ html, body {
 
 /* HOVER (NON-ACTIVE → ACTIVE FEEL) */
 .menu-main a:hover {
-  color: #111;
+  color: #ffffff;
 }
 
 .menu-main a:hover::before {
@@ -235,7 +252,7 @@ html, body {
 
 /* ACTIVE */
 .menu-main a.active {
-  color: #111;
+  color: #ffffff;
 }
 
 .menu-main a.active::before {
@@ -255,6 +272,7 @@ html, body {
   font-size: 14px;
   margin-bottom: 10px;
   opacity: 0.7;
+  color: #fff;
 }
 
 /* ADDRESS */
@@ -264,6 +282,7 @@ html, body {
   right: 80px;
   font-size: 13px;
   opacity: 0.7;
+  color: #fff;
 }
 /* HERO TEXT */
 .hero-content {
