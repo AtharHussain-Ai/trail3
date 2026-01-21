@@ -7,6 +7,10 @@
 
   <!-- GSAP -->
   <script src="https://unpkg.com/gsap@3/dist/gsap.min.js"></script>
+  <script src="https://unpkg.com/gsap@3/dist/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+
+
 
   <!-- Font -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -21,8 +25,7 @@
 
 <section class="hero">
   <video class="hero-video" autoplay muted loop playsinline>
-    <source src="assets/lizdahome.mp4" type="video/mp4" />
-    Your browser does not support the video tag.
+    <source src="assets/lizdahome.mp4" type="video/mp4"/>
   </video>
   <!-- NAVBAR -->
   <header class="nav">
@@ -60,7 +63,7 @@
           Our moisturizing face mask helps to support
           and strengthen skin’s
         </p>
-        <span>$32</span>
+        <span></span>
       </div>
     </div>
 
@@ -69,26 +72,6 @@
         Formulas that simplify your skincare developed
         with dermatological precision for everyday radiance.
       </p>
-<button class="shop-btn hero-cta">
-  <span class="button__icon-wrapper">
-    <svg viewBox="0 0 14 15" class="button__icon-svg" width="10">
-      <path d="M13.376 11.552l-.264-10.44-10.44-.24.024 2.28
-        6.96-.048L.2 12.56l1.488 1.488
-        9.432-9.432-.048 6.912 2.304.024z"
-        fill="currentColor"/>
-    </svg>
-
-    <svg viewBox="0 0 14 15"
-      class="button__icon-svg button__icon-svg--copy"
-      width="10">
-      <path d="M13.376 11.552l-.264-10.44-10.44-.24.024 2.28
-        6.96-.048L.2 12.56l1.488 1.488
-        9.432-9.432-.048 6.912 2.304.024z"
-        fill="currentColor"/>
-    </svg>
-  </span>
-  Shop Now
-</button>
 
     </div>
 
@@ -137,6 +120,28 @@
 
   </div>
 </div>
+
+
+<section id="page1">
+
+  <!-- LEFT TEXT -->
+  <div class="page1-left">
+    <span class="section-label">WHAT WE DO</span>
+
+    <h1 class="reveal-text">
+      ParseLabs is a team of dedicated experts specializing in customized software solutions designed to streamline our clients’ operations, optimize their processes, and boost their bottom line.
+    </h1>
+  </div>
+
+  <!-- RIGHT IMAGE → VIDEO ON HOVER -->
+  <div class="page1-right hover-video">
+    <img src="assets/m4.jpg" alt="Preview" class="video-poster" />
+    <video muted loop playsinline preload="none">
+      <source src="assets/vid1.mp4" type="video/mp4" />
+    </video>
+  </div>
+
+</section>
 
 <!-- JS -->
 <script src="script.js"></script>
