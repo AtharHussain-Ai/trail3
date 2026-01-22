@@ -99,7 +99,7 @@ html, body {
 
 /* NAVBAR */
 .nav {
-  position: absolute;
+  position: fixed;
   top: 30px;
   left: 40px;
   right: 40px;
@@ -457,6 +457,135 @@ html, body {
 }
 
 
+/* SECTION */
+#shoper {
+  padding: 40px 6vw;
+  perspective: 1200px;
+  width: 100%;
+  height: 100%;
+}
+
+/* HEADER */
+.shoper-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 60px;
+}
+
+.shoper-header h2 {
+  font-size: 56px;
+  font-weight: 500;
+  line-height: 1.05;
+}
+
+/* SLIDER BUTTONS */
+.slider-btns {
+  display: flex;
+  gap: 12px;
+}
+
+.slider-btn {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1px solid #2a0e0e;
+  background: transparent;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.slider-btn.next {
+  background: #2a0e0e;
+  color: #fff;
+}
+
+/* SLIDER */
+.slider {
+  overflow: hidden;
+}
+
+.shopers-track {
+  display: flex;
+}
+
+/* CARD */
+.shoper-card {
+  margin-right: 30px;
+  min-width: 360px;
+  background: #f1eadf;
+  border-radius: 26px;
+  padding: 26px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
+  transform-style: preserve-3d;
+  position: relative;
+  overflow: hidden;
+}
+
+/* LIGHT SWEEP */
+.shoper-card::after {
+  content: "";
+  position: absolute;
+  inset: -60%;
+  background: radial-gradient(
+    circle at var(--x, 50%) var(--y, 50%),
+    rgba(255,255,255,0.35),
+    transparent 60%
+  );
+  opacity: var(--glow, 0);
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+/* IMAGE */
+.shoper-card img {
+  width: 65%;
+  margin: 32px 0;
+  transform: translateZ(40px);
+}
+
+/* STOCK */
+.stock {
+  align-self: flex-start;
+  font-size: 12px;
+  background: #fff;
+  padding: 6px 14px;
+  border-radius: 20px;
+}
+
+/* TEXT */
+.shoper-card h4 {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.price {
+  font-size: 14px;
+  color: #777;
+  margin: 8px 0 16px;
+}
+
+/* BUTTON */
+.shoper-card button {
+  background: #2a0e0e;
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  padding: 14px 0;
+  width: 100%;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ✅ BUTTON HOVER (ONLY CHANGE REQUESTED) */
+.shoper-card button:hover {
+  background: #ffffff;
+  color: #2a0e0e;
+}
 
 
 
@@ -479,7 +608,13 @@ html, body {
     right: 20px;
     top: 20px;
   }
+  .shoper-header h2 {
+    font-size: 36px;
+  }
 
+  .slider-btns {
+    display: none;
+  }
   .nav-links a {
     display: none;
   }
