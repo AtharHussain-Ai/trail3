@@ -307,6 +307,73 @@ page2();
 
 
 
+function page3(){
+  gsap.registerPlugin(ScrollTrigger);
+
+/* ================= WORD SPLIT ================= */
+function splitWords(el) {
+  const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+  const nodes = [];
+  while (walker.nextNode()) nodes.push(walker.currentNode);
+
+  nodes.forEach(n => {
+    const frag = document.createDocumentFragment();
+    n.textContent.trim().split(/\s+/).forEach(w => {
+      const span = document.createElement("span");
+      span.className = "word";
+      span.textContent = w;
+      frag.appendChild(span);
+    });
+    n.parentNode.replaceChild(frag, n);
+  });
+}
+
+const headline = document.getElementById("hugger");
+splitWords(headline);
+
+/* ================= TEXT ANIMATION (ON ENTER PAGE 3) ================= */
+const textTL = gsap.timeline({
+  scrollTrigger: {
+    trigger: "#page3",
+    start: "top 70%",
+    toggleActions: "play none none none" // 👈 play once
+  }
+});
+
+textTL.from(".hugger .word", {
+  y: 18,
+  opacity: 0,
+  filter: "blur(6px)",
+  duration: 0.85,
+  stagger: 0.045,
+  ease: "power3.out"
+}).from(".italic", {
+  opacity: 0,
+  filter: "blur(14px)",
+  duration: 1
+}, "-=0.4");
+
+/* ================= IMAGE PARALLAX (DESKTOP ONLY) ================= */
+ScrollTrigger.matchMedia({
+  "(min-width: 901px)": function () {
+    gsap.to("#heroImage", {
+      yPercent: 12,
+      ease: "none",
+      scrollTrigger: {
+        trigger: "#page3",
+        start: "top bottom",
+        end: "bottom top",
+        scrub: 1.2
+      }
+    });
+  }
+});
+
+}
+
+
+page3()
+
 
 const menuBtn = document.querySelector(".menu-btn");
 const menuOverlay = document.querySelector(".menu-overlay");

@@ -588,6 +588,79 @@ html, body {
 }
 
 
+/* LAYOUT */
+#page3 {
+  height: 100vh;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  background-color: #fff;
+}
+
+/* IMAGE SIDE */
+.image-side {
+  width: 50%;
+  overflow: hidden;
+}
+
+.image-side img {
+  width: 100%;
+  height: 140%;
+  object-fit: cover;
+  transform: translateY(-10%);
+  will-change: transform;
+}
+
+/* TEXT SIDE */
+.text-side {
+  width: 50%;
+  position: relative;
+  padding: 64px 84px;
+}
+
+/* HEADLINE */
+.hugger {
+  max-width: 620px;
+  font-size: clamp(30px, 4.1vw, 60px);
+  font-weight: 300;
+  line-height: 1.08;
+  letter-spacing: -0.018em;
+  margin-left: -72px;
+  color: #000;
+}
+
+.italic {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+}
+
+.word {
+  display: inline-block;
+  margin-right: 0.25em;
+  white-space: nowrap;
+}
+
+/* BOTTOM */
+.bottom {
+  position: absolute;
+  right: 84px;
+  bottom: 64px;
+  max-width: 360px;
+}
+
+.bugger {
+  font-size: 14px;
+  line-height: 1.65;
+  opacity: 0.85;
+  color: #000;
+}
+
+.about {
+  display: inline-block;
+  margin-top: 22px;
+  border-bottom: 1px solid #303030;
+  color: #000;
+}
 
 
 
@@ -751,7 +824,36 @@ html, body {
     line-height: 1.5;
     opacity: 0.9;
   }
+ #page3 {
+    flex-direction: column;
+    height: auto;
+  }
 
+  .image-side,
+  .text-side {
+    width: 100%;
+  }
+
+  .text-side {
+    padding: 36px 24px 48px;
+  }
+
+  .hugger {
+    margin-left: 0;
+    font-size: 36px;
+  }
+
+  .bottom {
+    position: relative;
+    margin-top: 32px;
+    right: auto;
+    bottom: auto;
+  }
+
+  .image-side img {
+    height: 100%;
+    transform: none !important;
+  }
 
 }
 /* ================= LARGE LAPTOPS ================= */
