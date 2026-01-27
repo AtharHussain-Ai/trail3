@@ -158,152 +158,7 @@ function page1() {
 page1();
 
 
-function page2() {
-  const track = document.querySelector(".shopers-track");
-  const nextBtn = document.querySelector(".slider-btn.next");
-  const prevBtn = document.querySelector(".slider-btn.prev");
-  const body = document.body;
 
-  let cards = Array.from(document.querySelectorAll(".shoper-card"));
-  let index = 1;
-  let autoSlide;
-  let isAnimating = false;
-  const GAP = 30;
-
-  /* CLONE */
-  const firstClone = cards[0].cloneNode(true);
-  const lastClone = cards[cards.length - 1].cloneNode(true);
-
-  track.appendChild(firstClone);
-  track.insertBefore(lastClone, cards[0]);
-
-  cards = Array.from(document.querySelectorAll(".shoper-card"));
-
-  function getCardSize() {
-    return cards[0].offsetWidth + GAP;
-  }
-
-  let cardSize = getCardSize();
-  track.style.transform = `translateX(-${cardSize * index}px)`;
-
-  /* MOVE */
-  function move() {
-    isAnimating = true;
-    track.style.transition = "transform 0.7s ease";
-    track.style.transform = `translateX(-${cardSize * index}px)`;
-  }
-
-  function nextSlide() {
-    if (isAnimating) return;
-    index++;
-    move();
-  }
-
-  function prevSlide() {
-    if (isAnimating) return;
-    index--;
-    move();
-  }
-
-  /* LOOP FIX */
-  track.addEventListener("transitionend", () => {
-    isAnimating = false;
-    track.style.transition = "none";
-
-    if (index === cards.length - 1) {
-      index = 1;
-      track.style.transform = `translateX(-${cardSize * index}px)`;
-    }
-
-    if (index === 0) {
-      index = cards.length - 2;
-      track.style.transform = `translateX(-${cardSize * index}px)`;
-    }
-  });
-
-  /* AUTO */
-  function startAuto() {
-    stopAuto();
-    autoSlide = setInterval(nextSlide, 3000);
-  }
-
-  function stopAuto() {
-    clearInterval(autoSlide);
-  }
-
-  nextBtn.addEventListener("click", () => {
-    stopAuto();
-    nextSlide();
-    startAuto();
-  });
-
-  prevBtn.addEventListener("click", () => {
-    stopAuto();
-    prevSlide();
-    startAuto();
-  });
-
-  /* GSAP REVEAL */
-  gsap.from(cards, {
-    y: 80,
-    opacity: 0,
-    duration: 1.3,
-    ease: "power4.out",
-    stagger: 0.12
-  });
-
-  /* CARD + BUTTON LOGIC */
-  cards.forEach(card => {
-    const img = card.querySelector("img");
-    const bg = card.dataset.bg;
-    const button = card.querySelector("button");
-
-    /* CARD HOVER (NO BACKGROUND CHANGE) */
-    card.addEventListener("mouseenter", () => {
-      stopAuto();
-      card.style.setProperty("--glow", 1);
-    });
-
-    card.addEventListener("mousemove", e => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-
-      const rx = gsap.utils.mapRange(0, rect.height, 10, -10, y);
-      const ry = gsap.utils.mapRange(0, rect.width, -10, 10, x);
-
-      gsap.to(card, { rotateX: rx, rotateY: ry, duration: 0.25 });
-      gsap.to(img, { x: ry * 0.6, y: rx * 0.6, duration: 0.25 });
-
-      card.style.setProperty("--x", `${(x / rect.width) * 100}%`);
-      card.style.setProperty("--y", `${(y / rect.height) * 100}%`);
-    });
-
-    card.addEventListener("mouseleave", () => {
-      startAuto();
-      card.style.setProperty("--glow", 0);
-
-      gsap.to(card, { rotateX: 0, rotateY: 0, duration: 0.6 });
-      gsap.to(img, { x: 0, y: 0, duration: 0.6 });
-    });
-
-    /* ✅ BACKGROUND CHANGE — ONLY ON BUTTON HOVER */
-    button.addEventListener("mouseenter", () => {
-      stopAuto();
-      if (bg) body.style.backgroundColor = bg;
-    });
-
-    button.addEventListener("mouseleave", () => {
-      body.style.backgroundColor = "#ffffff";
-      startAuto();
-    });
-  });
-
-  /* INIT */
-  startAuto();
-}
-
-page2();
 
 
 
@@ -375,6 +230,8 @@ ScrollTrigger.matchMedia({
 page3()
 
 
+
+
 const menuBtn = document.querySelector(".menu-btn");
 const menuOverlay = document.querySelector(".menu-overlay");
 const closeBtn = document.querySelector(".menu-close");
@@ -383,6 +240,56 @@ const images = document.querySelectorAll(".menu-image");
 
 let activeImage = images[0];
 let nextImage = images[1];
+let scrollY = 0;
+
+/* =========================
+   HARD SCROLL BLOCK
+========================= */
+function preventScroll(e) {
+  e.preventDefault();
+  e.stopPropagation();
+  return false;
+}
+
+function lockScroll() {
+  scrollY = window.scrollY;
+
+  document.body.style.position = "fixed";
+  document.body.style.top = `-${scrollY}px`;
+  document.body.style.width = "100%";
+
+  window.addEventListener("wheel", preventScroll, { passive: false });
+  window.addEventListener("touchmove", preventScroll, { passive: false });
+  window.addEventListener("keydown", preventKeys, false);
+}
+
+function unlockScroll() {
+  document.body.style.position = "";
+  document.body.style.top = "";
+  document.body.style.width = "";
+
+  window.scrollTo(0, scrollY);
+
+  window.removeEventListener("wheel", preventScroll);
+  window.removeEventListener("touchmove", preventScroll);
+  window.removeEventListener("keydown", preventKeys);
+}
+
+function preventKeys(e) {
+  const keys = [
+    "ArrowUp",
+    "ArrowDown",
+    "Space",
+    "PageUp",
+    "PageDown",
+    "Home",
+    "End"
+  ];
+  if (keys.includes(e.code)) {
+    e.preventDefault();
+    return false;
+  }
+}
 
 /* =========================
    INITIAL STATE
@@ -402,7 +309,11 @@ links[0].classList.add("active");
 ========================= */
 const tl = gsap.timeline({
   paused: true,
-  defaults: { ease: "expo.out" }
+  defaults: { ease: "expo.out" },
+  onReverseComplete: () => {
+    menuOverlay.style.pointerEvents = "none";
+    unlockScroll();
+  }
 });
 
 tl
@@ -430,14 +341,15 @@ tl
   }, 0.35);
 
 /* =========================
-   OPEN
+   OPEN MENU
 ========================= */
 menuBtn.addEventListener("click", () => {
+  lockScroll();
   tl.timeScale(1).play(0);
 });
 
 /* =========================
-   CLOSE (BUTTERY SMOOTH)
+   CLOSE MENU
 ========================= */
 closeBtn.addEventListener("click", () => {
   tl.timeScale(1.4).reverse();
@@ -458,11 +370,7 @@ function swapImage(img) {
     filter: "blur(10px)"
   });
 
-  const imageTL = gsap.timeline({
-    defaults: { ease: "expo.out" }
-  });
-
-  imageTL
+  gsap.timeline({ defaults: { ease: "expo.out" } })
     .to(activeImage, {
       scale: 1.05,
       opacity: 0,
@@ -478,10 +386,7 @@ function swapImage(img) {
     .add(() => {
       activeImage.classList.remove("active");
       nextImage.classList.add("active");
-
-      const temp = activeImage;
-      activeImage = nextImage;
-      nextImage = temp;
+      [activeImage, nextImage] = [nextImage, activeImage];
     });
 }
 
@@ -489,7 +394,6 @@ function swapImage(img) {
    LINK HOVER – MAGNETIC
 ========================= */
 links.forEach(link => {
-
   link.addEventListener("mouseenter", () => {
     links.forEach(l => l.classList.remove("active"));
     link.classList.add("active");
@@ -511,7 +415,6 @@ links.forEach(link => {
     });
   });
 });
-
 
 
 
