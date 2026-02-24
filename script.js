@@ -230,6 +230,85 @@ ScrollTrigger.matchMedia({
 page3()
 
 
+function page4(){
+  /* =========================
+   FADE IN
+========================= */
+
+gsap.utils.toArray(".product_card").forEach(card => {
+  gsap.from(card, {
+    y: 100,
+    opacity: 0,
+    duration: 1,
+    ease: "power3.out",
+    scrollTrigger: {
+      trigger: card,
+      start: "top 85%"
+    }
+  });
+});
+
+
+
+/* =========================
+   PARALLAX (DESKTOP ONLY)
+========================= */
+
+const mm = gsap.matchMedia();
+
+mm.add("(min-width: 901px)", () => {
+
+  gsap.utils.toArray(".image_wrapper").forEach(wrapper => {
+
+    const img = wrapper.querySelector("img");
+
+    gsap.to(img, {
+      yPercent: -20,
+      ease: "none",
+      scrollTrigger: {
+        trigger: wrapper,
+        start: "top bottom",
+        end: "bottom top",
+        scrub: true
+      }
+    });
+
+  });
+
+});
+
+
+
+/* =========================
+   BG HOVER CHANGE
+========================= */
+
+const section = document.querySelector("#products_section");
+const cards = document.querySelectorAll(".product_card");
+
+cards.forEach(card => {
+
+  card.addEventListener("mouseenter", () => {
+    const color = card.getAttribute("data-color");
+
+    gsap.to(section, {
+      backgroundColor: color,
+      duration: 0.6,
+      ease: "power2.out"
+    });
+  });
+
+  card.addEventListener("mouseleave", () => {
+    gsap.to(section, {
+      backgroundColor: "#dfdfdf",
+      duration: 0.6,
+      ease: "power2.out"
+    });
+  });
+
+});
+}
+page4()
 
 
 const menuBtn = document.querySelector(".menu-btn");

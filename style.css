@@ -25,7 +25,7 @@ html, body {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 100%;
+  width: 120%;
   height: 100%;
   object-fit: cover;
   transform: translate(-50%, -50%);
@@ -515,6 +515,118 @@ background: linear-gradient(
 }
 
 
+/* SECTION */
+
+#products_section{
+padding:8vw 6vw;
+background: #dfdfdf;
+transition:background 0.6s cubic-bezier(.22,1,.36,1);
+}
+
+.products_header{
+display:flex;
+align-items:flex-end;
+gap:20px;
+margin-bottom:6vw;
+}
+
+.products_header h1{
+font-size:clamp(60px,8vw,120px);
+font-weight:200;
+color:#000000;
+letter-spacing:-2px;
+}
+
+.products_header span{
+color:#fd0050;
+}
+
+.products_count{
+font-size:18px;
+margin-bottom:18px;
+color:#777;
+}
+
+/* GRID */
+
+.products_grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:5vw;
+max-width:1300px;
+margin:0 auto;
+}
+
+.product_card{
+position:relative;
+border-radius:42px;
+overflow:hidden;
+cursor:pointer;
+}
+
+/* IMAGE */
+
+.image_wrapper{
+position:relative;
+width:100%;
+height:38vw;
+overflow:hidden;
+}
+
+.product_card img{
+position:absolute;
+width:100%;
+height:auto;
+min-height: 120%;
+top:0;
+left:0;
+object-fit:cover;
+
+}
+
+.product_card:hover img{
+filter:grayscale(100%);
+}
+
+/* FULL WIDTH */
+.full{
+grid-column:1 / -1;
+}
+
+/* BUTTON */
+
+.produc_button{
+position:absolute;
+bottom:30px;
+left:30px;
+display:flex;
+gap:14px;
+}
+
+.produc_button button{
+background:rgb(69, 69, 69);
+border:none;
+padding:14px 30px;
+border-radius:50px;
+cursor:pointer;
+font-size:15px;
+transition:all .3s ease;
+color: #ddd;
+}
+
+.arrow_btn{
+width:46px;
+height:46px;
+padding:0;
+display:flex;
+align-items:center;
+justify-content:center;
+color: #ffffff;
+}
+
+.produc_button button:hover{
+transform:translateY(-4px);
+}
 
 
 /* ================= MOBILE ================= */
@@ -692,6 +804,14 @@ background: linear-gradient(
     height: 100%;
     transform: none !important;
   }
+  .products_grid{
+grid-template-columns:1fr;
+}
+
+.image_wrapper{
+height:65vw;
+}
+
 
 }
 /* ================= LARGE LAPTOPS ================= */
