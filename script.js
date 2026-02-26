@@ -310,6 +310,62 @@ cards.forEach(card => {
 }
 page4()
 
+function page5(){
+  const marqueeMain = gsap.to(".text_marquee",{
+  x:"-50%",
+  duration:26,
+  ease:"none",
+  repeat:-1
+});
+
+gsap.to(".text_marquee_reverse",{
+  x:"50%",
+  duration:34,
+  ease:"none",
+  repeat:-1
+});
+
+/* =========================
+   INTERACTION
+========================= */
+
+const img = document.querySelector(".marquee_image img");
+const lens = document.querySelector(".glass_bg");
+const hifers = document.querySelectorAll(".hifer");
+
+let speedTarget = 1;
+
+window.addEventListener("mousemove",(e)=>{
+  const x = (e.clientX / innerWidth - 0.5) * 40;
+  const y = (e.clientY / innerHeight - 0.5) * 20;
+
+  gsap.to(img,{ x,y,duration:0.8,ease:"power3.out" });
+  gsap.to(lens,{ left:e.clientX, top:e.clientY,duration:0.6,ease:"power3.out" });
+
+  hifers.forEach((h,i)=>{
+    gsap.to(h,{
+      x:(e.clientX / innerWidth - 0.5) * (20 + i*6),
+      duration:0.8,
+      ease:"power3.out"
+    });
+  });
+
+  speedTarget = 0.4;
+});
+
+/* =========================
+   SMOOTH SPEED
+========================= */
+
+gsap.ticker.add(()=>{
+  marqueeMain.timeScale(
+    gsap.utils.interpolate(marqueeMain.timeScale(), speedTarget, 0.05)
+  );
+  speedTarget = 1;
+});
+}
+page5()
+
 
 const menuBtn = document.querySelector(".menu-btn");
 const menuOverlay = document.querySelector(".menu-overlay");

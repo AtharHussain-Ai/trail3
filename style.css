@@ -629,9 +629,141 @@ transform:translateY(-4px);
 }
 
 
+
+/* =========================
+   SECTION
+========================= */
+
+.page_marque{
+  position:relative;
+  width:100%;
+  height:100vh;
+  background:#f1faf7;
+  overflow:hidden;
+}
+
+/* Grain */
+.page_marque::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background-image:url("https://grainy-gradients.vercel.app/noise.svg");
+  opacity:0.08;
+  pointer-events:none;
+  z-index:20;
+}
+
+/* Radial focus */
+.focus{
+  position:absolute;
+  inset:0;
+  background:radial-gradient(
+    circle at center,
+    rgba(255,255,255,0.65),
+    transparent 60%
+  );
+  z-index:1;
+  pointer-events:none;
+}
+
+/* =========================
+   GLASS
+========================= */
+
+.glass_bg{
+  position:absolute;
+  width:320px;
+  height:320px;
+  border-radius:50%;
+  backdrop-filter:blur(20px);
+  background:rgba(255,255,255,0.25);
+  pointer-events:none;
+  z-index:10;
+  transform:translate(-50%,-50%);
+  left:50%;
+  top:50%;
+}
+
+/* =========================
+   MARQUEES
+========================= */
+
+.text_marquee,
+.text_marquee_reverse{
+  position:absolute;
+  width:200%;
+  display:flex;
+  white-space:nowrap;
+  pointer-events:none;
+}
+
+.text_marquee{
+  top:50%;
+  transform:translateY(-50%);
+  z-index:2;
+}
+
+.text_marquee_reverse{
+  top:62%;
+  transform:translateY(-50%);
+  z-index:2;
+  opacity:0.25;
+}
+
+.text_marquee h1,
+.text_marquee_reverse h1{
+  font-size:clamp(120px,9vw,200px);
+  font-weight:300;
+  letter-spacing:8px;
+  padding-right:6vw;
+  text-transform:uppercase;
+  color:rgba(0,0,0,0.45);
+}
+
+/* =========================
+   IMAGE
+========================= */
+
+.marquee_image{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
+  z-index:5;
+  pointer-events:none;
+}
+
+.marquee_image img{
+  height:100%;
+  width:auto;
+  object-fit:cover;
+  object-position:center bottom;
+  will-change:transform;
+}
+
+/* =========================
+   KINETIC HIFERS
+========================= */
+
+.hifers{
+  position:absolute;
+  inset:0;
+  display:flex;
+  justify-content:space-around;
+  pointer-events:none;
+  z-index:3;
+}
+
+.hifer{
+  width:1px;
+  height:100%;
+  background:rgba(0,0,0,0.08);
+}
+
 /* ================= MOBILE ================= */
 @media (max-width: 900px) {
-
+  
   /* NAV */
   .nav {
     left: 20px;
@@ -811,7 +943,9 @@ grid-template-columns:1fr;
 .image_wrapper{
 height:65vw;
 }
-
+.glass_bg,.hifers{
+  display: none;
+}
 
 }
 /* ================= LARGE LAPTOPS ================= */
