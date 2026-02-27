@@ -22,7 +22,73 @@ gsap.ticker.lagSmoothing(0);
 
 
 
+function loader(){
+  const count = document.getElementById("count");
+const html = document.documentElement;
+const body = document.body;
 
+/* LOCK SCROLL */
+html.classList.add("locked");
+body.classList.add("locked");
+
+let progress = { value: 0 };
+
+/* Organic breathing orb */
+gsap.to(".orb", {
+  scale: 1.18,
+  duration: 3,
+  ease: "sine.inOut",
+  repeat: -1,
+  yoyo: true
+});
+
+/* Loader timeline */
+const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
+
+tl.to(".logo", {
+  opacity: 1,
+  filter: "blur(0px)",
+  duration: 2
+});
+
+tl.to(progress, {
+  value: 100,
+  duration: 3.2,
+  onUpdate: () => {
+    count.textContent = Math.round(progress.value);
+
+    gsap.to(".orb", {
+      scale: 1 + progress.value / 240,
+      opacity: 0.6 + progress.value / 300,
+      duration: 0.2,
+      overwrite: true
+    });
+  }
+}, "-=1.6");
+
+/* Luxury pause */
+tl.to({}, { duration: 0.6 });
+
+/* Exit */
+tl.to(".loader", {
+  yPercent: -100,
+  duration: 1.7,
+  ease: "expo.inOut"
+});
+
+/* Reveal content */
+tl.to(".main", {
+  opacity: 1,
+  duration: 1
+}, "-=1");
+
+/* UNLOCK SCROLL */
+tl.call(() => {
+  html.classList.remove("locked");
+  body.classList.remove("locked");
+});
+}
+loader()
 
 function home() {
 
@@ -300,7 +366,7 @@ cards.forEach(card => {
 
   card.addEventListener("mouseleave", () => {
     gsap.to(section, {
-      backgroundColor: "#dfdfdf",
+      backgroundColor: "#AC9C8D",
       duration: 0.6,
       ease: "power2.out"
     });
@@ -366,6 +432,64 @@ gsap.ticker.add(()=>{
 }
 page5()
 
+function footer(){
+
+  // prevent replay
+  let played = false;
+
+  // hide footer initially
+  gsap.set(
+    [".footer_text div", ".footer_huge", ".footer_bottom"],
+    { opacity:0, y:40 }
+  );
+
+  const observer = new IntersectionObserver((entries)=>{
+    if(entries[0].isIntersecting && !played){
+
+      played = true;
+
+      /* ===================== CINEMATIC REVEAL ===================== */
+      const tl = gsap.timeline({
+        defaults:{ ease:"power4.out" }
+      });
+
+      tl.to(".footer_text div", {
+        opacity:1,
+        y:0,
+        stagger:0.15,
+        duration:1.4
+      })
+      .to(".footer_huge", {
+        opacity:1,
+        y:0,
+        duration:1.8
+      }, "-=0.6")
+      .to(".footer_bottom", {
+        opacity:1,
+        duration:1.2
+      }, "-=0.8");
+
+      /* ===================== SILK LIGHT DRIFT ===================== */
+      gsap.to(".footer::before", {
+        x:60,
+        y:-40,
+        duration:18,
+        ease:"sine.inOut",
+        repeat:-1,
+        yoyo:true
+      });
+
+      observer.disconnect(); // run only once
+    }
+  },{
+    threshold:0.35   // footer must be 35% visible
+  });
+
+  observer.observe(document.querySelector(".footer"));
+}
+
+/* INIT */
+footer();
 
 const menuBtn = document.querySelector(".menu-btn");
 const menuOverlay = document.querySelector(".menu-overlay");
